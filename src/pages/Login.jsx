@@ -21,7 +21,7 @@ const Login = () => {
       const { data } = await api.post("/api/users/login", formData);
 
       // ✅ Save token in localStorage
-      localStorage.setItem("token", data.token);
+      // localStorage.setItem("token", data.token);
 
       // ✅ Redirect to dashboard
       navigate("/dashboard");
