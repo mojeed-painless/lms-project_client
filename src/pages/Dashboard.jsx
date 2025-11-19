@@ -11,17 +11,17 @@ export default function Dashboard() {
   
   useEffect(() => {
     const fetchUser = async () => {
-      // const token = localStorage.getItem("token");
-      // if (!token) {
-      //   navigate("/login");
-      //   return;
-      // }
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
 
       try {
-        // const config = {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // };
-        const { data } = await api.get("/api/users/me");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const { data } = await api.get("/api/users/me", config);
         setUser({ name: data.firstName, role: data.role });
       } catch (error) {
         console.log(error);
@@ -32,17 +32,9 @@ export default function Dashboard() {
     fetchUser();
   }, [navigate]);
 
-  const handleLogout = async () => {
-    try {
-      // endpoint that clears the auth cookie on the server
-      await api.post("/api/users/logout");
-    } catch (e) {
-      console.log("logout error", e);
-    } finally {
-      // client-side cleanup / redirect
-      setUser({ name: "", role: "" });
-      navigate("/login");
-    }
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // delete JWT
+    navigate("/login"); // redirect to login page
   };
 
   return (
