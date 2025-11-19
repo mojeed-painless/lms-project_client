@@ -8,8 +8,7 @@ const Login = () => {
   const [message, setMessage] = useState("");
   // const { login } = useAuth();
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
+const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -18,10 +17,9 @@ const Login = () => {
     setMessage("");
 
     try {
-      const { data } = await api.post("/api/users/login", formData);
 
-      // ✅ Save token in localStorage
-      localStorage.setItem("token", data.token);
+      const payload = { userName: formData.username, password: formData.password };
+      const { data } = await api.post("/api/users/login", payload);
 
       // ✅ Redirect to dashboard
       navigate("/dashboard");
