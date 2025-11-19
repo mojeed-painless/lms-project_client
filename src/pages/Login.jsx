@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext.jsx";
+// import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api.js";
 
@@ -18,10 +18,10 @@ const Login = () => {
     setMessage("");
 
     try {
-      // const { data } = await api.post("/api/users/login", formData);
+      const { data } = await api.post("/api/users/login", formData);
 
       // ✅ Save token in localStorage
-      // localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);
 
       // ✅ Redirect to dashboard
       navigate("/dashboard");
