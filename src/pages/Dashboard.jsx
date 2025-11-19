@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
@@ -21,7 +21,7 @@ export default function Dashboard() {
         const config = {
           headers: { Authorization: `Bearer ${token}` },
         };
-        const { data } = await axios.get("http://localhost:5000/api/users/me", config);
+        const { data } = await api.get("/api/users/me", config);
         setUser({ name: data.firstName, role: data.role });
       } catch (error) {
         console.log(error);

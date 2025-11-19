@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api.js";
 
 const Login = () => {
   const [formData, setFormData] = useState({ userName: "", password: "" });
@@ -18,7 +18,7 @@ const Login = () => {
     setMessage("");
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/users/login", formData);
+      const { data } = await api.post("/api/users/login", formData);
 
       // ✅ Save token in localStorage
       localStorage.setItem("token", data.token);
