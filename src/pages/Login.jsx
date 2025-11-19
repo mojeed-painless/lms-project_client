@@ -8,6 +8,7 @@ const Login = () => {
   const [message, setMessage] = useState("");
   // const { login } = useAuth();
   const navigate = useNavigate();
+
 const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -15,16 +16,29 @@ const handleChange = (e) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
+    console.log("Login submit", formData);
 
     try {
-      const { data } = await api.post("/api/users/login", formData);
+      const response = await api.post("/api/users/login", formData);
+      console.log("Login response:", response);
 
-      // ✅ Save token in localStorage
-      localStorage.setItem("token", data.token);
+      const data = response.data;
+      // store token only if backend returns one (otherwise rely on HttpOnly cookie)
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        console.log("Saved token to localStorage");
+      } else {
+        console.log("No token in response — expecting cookie-based auth");
+      }
 
-      // ✅ Redirect to dashboard
-      navigate("/dashboard");
+      // navigate only on explicit success
+      if (data?.ok || data?.token) {
+        navigate("/dashboard");
+      } else {
+        setMessage(data?.message || "Login failed");
+      }
     } catch (error) {
+      console.error("Login error:", error);
       setMessage(error.response?.data?.message || "Login failed");
     }
   };
