@@ -17,9 +17,10 @@ const handleChange = (e) => {
     setMessage("");
 
     try {
+      const { data } = await api.post("/api/users/login", formData);
 
-      const payload = { userName: formData.username, password: formData.password };
-      const { data } = await api.post("/api/users/login", payload);
+      // ✅ Save token in localStorage
+      localStorage.setItem("token", data.token);
 
       // ✅ Redirect to dashboard
       navigate("/dashboard");
