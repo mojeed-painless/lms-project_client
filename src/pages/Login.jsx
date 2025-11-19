@@ -42,6 +42,7 @@ const Login = () => {
           value={formData.userName}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="username"
         />
         <input
           type="password"
@@ -50,6 +51,7 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="current-password"
         />
         <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
           Login

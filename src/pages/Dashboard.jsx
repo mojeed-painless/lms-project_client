@@ -21,7 +21,7 @@ export default function Dashboard() {
         // const config = {
         //   headers: { Authorization: `Bearer ${token}` },
         // };
-        const { data } = await api.get("/api/users/me", config);
+        const { data } = await api.get("/api/users/me");
         setUser({ name: data.firstName, role: data.role });
       } catch (error) {
         console.log(error);

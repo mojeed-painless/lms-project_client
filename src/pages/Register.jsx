@@ -50,6 +50,7 @@ const Register = () => {
           value={formData.firstName}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="given-name"
         />
 
         <input
@@ -59,6 +60,7 @@ const Register = () => {
           value={formData.lastName}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="family-name"
         />
 
         <input
@@ -68,15 +70,17 @@ const Register = () => {
           value={formData.email}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="email"
         />
 
         <input
           type="text"
           name="userName"
-          placeholder="User Name"
+          placeholder="Username"
           value={formData.userName}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="username"
         />
 
         <input
@@ -86,6 +90,7 @@ const Register = () => {
           value={formData.password}
           onChange={handleChange}
           className="w-full p-2 border rounded"
+          autoComplete="new-password"
         />
 
         {/* ROLE DROPDOWN */}
